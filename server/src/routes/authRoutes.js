@@ -1,9 +1,9 @@
 import express from 'express';
 import {
-    changePassword,
-    login,
-    resetPassword,
-    sendPasswordResetEmail
+  changePassword,
+  login,
+  resetPassword,
+  sendPasswordResetEmail,
 } from '../controllers/authController.js';
 import { authenticateToken } from '../middlewares/auth.js';
 

@@ -1,40 +1,35 @@
-import { FaUsers } from 'react-icons/fa';
-import { IoHomeOutline } from 'react-icons/io5';
+import { IoMdShare } from 'react-icons/io';
+import { IoPerson } from 'react-icons/io5';
 
-import { HiShoppingCart } from 'react-icons/hi';
-import { IoAddOutline } from 'react-icons/io5';
-import { MdArticle, MdDashboard } from 'react-icons/md';
+import { FaPersonChalkboard } from 'react-icons/fa6';
+
+import { MdDashboard, MdNoteAdd } from 'react-icons/md';
 
 export const SIDEBAR_LINKS = [
   {
     name: 'Dashboard',
-    path: '/admin/dashboard',
+    path: '',
     icon: <MdDashboard className="h-5 w-5" />,
   },
   {
-    name: 'Home',
-    path: '/',
-    icon: <IoHomeOutline className="h-5 w-5" />,
+    name: 'My Profile',
+    path: 'my-profile',
+    icon: <IoPerson className="h-5 w-5" />,
   },
 
   {
-    name: 'Collectors',
-    path: '/admin/dashboard/collectors',
-    icon: <FaUsers className="h-5 w-5" />,
+    name: 'My Notebooks',
+    path: '',
+    icon: <MdNoteAdd className="h-5 w-5" />,
   },
   {
-    name: 'Blog',
-    path: '/admin/dashboard/blog',
-    icon: <MdArticle className="h-5 w-5" />,
+    name: 'Shared Notes',
+    path: '',
+    icon: <IoMdShare className="h-5 w-5" />,
   },
   {
-    name: 'Add Products',
-    path: '/admin/dashboard/addproduct',
-    icon: <IoAddOutline className="h-5 w-5" />,
-  },
-  {
-    name: 'Orders',
-    path: '/admin/dashboard/orders',
-    icon: <HiShoppingCart className="h-5 w-5" />,
+    name: 'Study Space',
+    path: '',
+    icon: <FaPersonChalkboard className="h-5 w-5" />,
   },
 ];
