@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import { SECRET_KEY } from '../config/config.js';
 import { HttpStatus } from '../constant/constants.js';
 import { throwError, asyncErrorHandler } from '../helpers/index.js';
-import { ExpiredTokenStore } from '../schemaModels/model.js';
 
 export let authenticateToken = asyncErrorHandler(async (req, res, next) => {
   const { authorization } = req.headers;

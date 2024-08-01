@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt';
-import { randomInt } from 'crypto';
 import { CLIENT_URL, FROM_EMAIL } from '../config/config.js';
 import { HttpStatus } from '../constant/constants.js';
-import { ExpiredTokenStore, User } from '../schemaModels/model.js';
+import { User } from '../schemaModels/model.js';
 import { generateAuthToken, sendMail } from '../utils/index.js';
 
 import {
