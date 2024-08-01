@@ -3,6 +3,8 @@ import userRouter from './userRoutes.js';
 import authRouter from './authRoutes.js';
 import notebookRouter from './notebookRoutes.js';
 import noteRouter from './noteRoutes.js';
+import resourceRouter from './rourceRoutes.js';
+import studySessionRouter from './studySessionRoutes.js';
 
 const apiRouter = express.Router();
 
@@ -22,6 +24,15 @@ const apiRoutes = [
   {
     router: noteRouter,
     path: '/notes',
+  },
+  {
+    router: resourceRouter,
+    path: '/resources',
+  },
+
+  {
+    router: studySessionRouter,
+    path: '/sessions',
   },
 ];
 

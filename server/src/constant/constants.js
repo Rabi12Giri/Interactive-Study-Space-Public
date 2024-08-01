@@ -56,3 +56,10 @@ export const HttpStatus = {
   INSUFFICIENT_STORAGE: 507,
   NETWORK_AUTHENTICATION_REQUIRED: 511,
 };
+
+
+export const STUDY_SESSION_STATUS = {
+  ONGOING: 'ongoing',
+  PAUSED: 'paused',
+  COMPLETED: 'completed',
+};

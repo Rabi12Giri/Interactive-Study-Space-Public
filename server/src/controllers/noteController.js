@@ -3,10 +3,11 @@ import { HttpStatus } from '../constant/constants.js';
 import { sendSuccessResponse } from '../helpers/index.js';
 import { Note, Notebook } from '../schemaModels/model.js';
 import { asyncErrorHandler, throwError } from '../helpers/index.js';
+import deleteFile from '../utils/deleteFile.js';
 
 // Create a new note
 export const createNote = asyncErrorHandler(async (req, res) => {
-  const { notebookId, title, content, images } = req.body;
+  const { notebookId, title, content } = req.body;
 
   if (!notebookId || !title || !content) {
     throwError({
@@ -23,11 +24,14 @@ export const createNote = asyncErrorHandler(async (req, res) => {
     });
   }
 
+  // Extract and store file names
+  const images = req.files.map((file) => file.filename);
+
   const note = new Note({
     notebookId,
     title,
     content,
-    images, // Optional field for note images
+    images, // Store file names in the database
   });
 
   await note.save();
@@ -42,9 +46,10 @@ export const createNote = asyncErrorHandler(async (req, res) => {
 // Update a note
 export const updateNote = asyncErrorHandler(async (req, res) => {
   const { id } = req.params;
-  const { title, content, images } = req.body;
+  const { title, content } = req.body;
 
   const note = await Note.findById(id);
+
   if (!note) {
     throwError({
       message: 'Note not found',
@@ -54,7 +59,17 @@ export const updateNote = asyncErrorHandler(async (req, res) => {
 
   if (title) note.title = title;
   if (content) note.content = content;
-  if (images) note.images = images;
+
+  // Handle image updates
+  if (req.files && req.files.length > 0) {
+    const newImages = req.files.map((file) => file.filename);
+
+    // Delete old images
+    note.images.forEach((image) => deleteFile(image));
+
+    // Update the note with new images
+    note.images = newImages;
+  }
 
   await note.save();
 
@@ -77,11 +92,15 @@ export const deleteNote = asyncErrorHandler(async (req, res) => {
     });
   }
 
+  // Delete associated image files
+  note.images.forEach((image) => deleteFile(image));
+
+  // Delete the note document
   await note.deleteOne();
 
   sendSuccessResponse({
     res,
-    message: 'Note deleted successfully',
+    message: 'Note and associated images deleted successfully',
   });
 });
 
@@ -96,7 +115,7 @@ export const getNotesByNotebookId = asyncErrorHandler(async (req, res) => {
     });
   }
 
-  const notes = await Note.find({ notebookId }).populate('notebookId');
+  const notes = await Note.find({ notebookId });
 
   if (!notes || notes.length === 0) {
     throwError({

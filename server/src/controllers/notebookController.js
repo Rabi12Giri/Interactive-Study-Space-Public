@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import { HttpStatus } from '../constant/constants.js';
-import { sendSuccessResponse } from '../helpers/index.js';
+import { asyncErrorHandler, sendSuccessResponse, throwError } from '../helpers/index.js';
 import { Note, Notebook, User } from '../schemaModels/model.js';
-import { asyncErrorHandler, throwError } from '../helpers/index.js';
 
 // Create a new notebook
 export const createNotebook = asyncErrorHandler(async (req, res) => {
