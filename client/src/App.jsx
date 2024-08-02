@@ -8,6 +8,7 @@ import MyProfile from './pages/dashboard/MyProfile';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ChangePassword from './pages/auth/ChangePassword';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import Notebooks from './pages/dashboard/notebook/Notebooks';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<div>Dashboard</div>} />
         <Route path="my-profile" element={<MyProfile />} />
+        <Route path="notebooks" element={<Notebooks />} />
       </Route>
     </Routes>
   );

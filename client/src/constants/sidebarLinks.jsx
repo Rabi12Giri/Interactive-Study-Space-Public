@@ -19,7 +19,7 @@ export const SIDEBAR_LINKS = [
 
   {
     name: 'My Notebooks',
-    path: '',
+    path: 'notebooks',
     icon: <MdNoteAdd className="h-5 w-5" />,
   },
   {
