@@ -117,13 +117,6 @@ export const getNotesByNotebookId = asyncErrorHandler(async (req, res) => {
 
   const notes = await Note.find({ notebookId });
 
-  if (!notes || notes.length === 0) {
-    throwError({
-      message: 'No notes found for this notebook',
-      statusCode: HttpStatus.NOT_FOUND,
-    });
-  }
-
   sendSuccessResponse({
     res,
     data: notes,

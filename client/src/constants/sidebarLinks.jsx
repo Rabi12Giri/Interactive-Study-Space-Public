@@ -3,13 +3,13 @@ import { IoPerson } from 'react-icons/io5';
 
 import { FaPersonChalkboard } from 'react-icons/fa6';
 
-import { MdDashboard, MdNoteAdd } from 'react-icons/md';
+import { MdNoteAdd } from 'react-icons/md';
 
 export const SIDEBAR_LINKS = [
   {
-    name: 'Dashboard',
+    name: 'My Notebooks',
     path: '',
-    icon: <MdDashboard className="h-5 w-5" />,
+    icon: <MdNoteAdd className="h-5 w-5" />,
   },
   {
     name: 'My Profile',
@@ -18,18 +18,13 @@ export const SIDEBAR_LINKS = [
   },
 
   {
-    name: 'My Notebooks',
-    path: 'notebooks',
-    icon: <MdNoteAdd className="h-5 w-5" />,
-  },
-  {
     name: 'Shared Notes',
-    path: '',
+    path: 'shared-notebooks',
     icon: <IoMdShare className="h-5 w-5" />,
   },
   {
     name: 'Study Space',
-    path: '',
+    path: 'study-session',
     icon: <FaPersonChalkboard className="h-5 w-5" />,
   },
 ];

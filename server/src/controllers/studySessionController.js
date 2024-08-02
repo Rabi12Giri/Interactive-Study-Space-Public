@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { HttpStatus, STUDY_SESSION_STATUS } from '../constant/constants.js';
 import {
   asyncErrorHandler,
@@ -130,13 +131,6 @@ export const getStudySessionsByUserId = asyncErrorHandler(async (req, res) => {
 
   const studySessions = await StudySession.find({ userId });
 
-  if (!studySessions.length) {
-    throwError({
-      message: 'No study sessions found for this user',
-      statusCode: HttpStatus.NOT_FOUND,
-    });
-  }
-
   sendSuccessResponse({
     res,
     data: studySessions,
@@ -163,6 +157,33 @@ export const deleteStudySession = asyncErrorHandler(async (req, res) => {
 
   sendSuccessResponse({
     res,
+    message: 'Study session deleted successfully',
+  });
+});
+
+// Delete a study session
+export const getSessionBySessionId = asyncErrorHandler(async (req, res) => {
+  const { sessionId } = req.params;
+
+  if (!mongoose.isValidObjectId(sessionId)) {
+    throwError({
+      message: 'Invalid session id provided',
+      statusCode: HttpStatus.BAD_REQUEST,
+    });
+  }
+
+  const studySession = await StudySession.findById(sessionId);
+
+  if (!studySession) {
+    throwError({
+      message: 'Study session not found',
+      statusCode: HttpStatus.NOT_FOUND,
+    });
+  }
+
+  sendSuccessResponse({
+    res,
+    data: studySession,
     message: 'Study session deleted successfully',
   });
 });

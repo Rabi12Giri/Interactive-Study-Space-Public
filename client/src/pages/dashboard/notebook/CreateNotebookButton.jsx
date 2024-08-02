@@ -6,15 +6,13 @@ import {
   DialogHeader,
   Textarea,
 } from '@material-tailwind/react';
-import { getTokenFromCookie, useAuth } from '../../../utils';
 import { useState } from 'react';
-import { showNotification } from '../../../utils/alerts';
+import { toast } from 'react-toastify';
+import { getTokenFromCookie } from '../../../utils';
 
-const CreateNotebookButton = () => {
+const CreateNotebookButton = ({ onSuccess }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
-
-  const { currentUser } = useAuth();
 
   const token = getTokenFromCookie();
 
@@ -33,21 +31,21 @@ const CreateNotebookButton = () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ name, authorId: currentUser._id }),
+      body: JSON.stringify({ name }),
     });
 
     const data = await res.json();
-    console.log(data, 'data');
 
     if (res.ok) {
-      showNotification({
-        icon: 'success',
-        title: 'Success',
-        message: data.message,
-      });
+      toast.success(data.message);
+      onSuccess();
       handleClose();
       setName('');
+
+      return;
     }
+
+    toast.error(data.message);
   };
 
   return (

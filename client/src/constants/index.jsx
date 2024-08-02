@@ -4,3 +4,9 @@ export const COOKIE_NAMES = {
 };
 
 export * from './sidebarLinks';
+
+export const STUDY_SESSION_STATUS = {
+  ONGOING: 'ongoing',
+  PAUSED: 'paused',
+  COMPLETED: 'completed',
+};

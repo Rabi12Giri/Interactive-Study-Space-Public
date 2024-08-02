@@ -29,9 +29,8 @@ export const createCookie = ({ name, value, daysToExpire = '7d' }) => {
 };
 
 export const removeCookie = () => {
-  document.cookie =
-    COOKIE_NAMES.AUTH_TOKEN +
-    '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-  document.cookie =
-    COOKIE_NAMES.ROLE + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  Object.values(COOKIE_NAMES).forEach((cookie) => {
+    document.cookie =
+      cookie + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  });
 };

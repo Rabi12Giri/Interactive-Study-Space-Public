@@ -6,6 +6,7 @@ import {
   endStudySession,
   getStudySessionsByUserId,
   deleteStudySession,
+  getSessionBySessionId,
 } from '../controllers/studySessionController.js';
 import { authenticateToken } from '../middlewares/auth.js';
 
@@ -29,5 +30,7 @@ studySessionRouter.post('/:sessionId/resume', resumeStudySession);
 studySessionRouter.post('/:sessionId/end', endStudySession);
 
 studySessionRouter.delete('/:sessionId', deleteStudySession);
+
+studySessionRouter.get('/:sessionId', getSessionBySessionId);
 
 export default studySessionRouter;

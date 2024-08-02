@@ -1,12 +1,12 @@
 import { Card, List, ListItem, ListItemPrefix } from '@material-tailwind/react';
 import { FaSignInAlt } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { COOKIE_NAMES, SIDEBAR_LINKS } from '../constants';
-import { removeCookie } from '../utils';
+import { SIDEBAR_LINKS } from '../constants';
+import { useAuth } from '../utils';
 
 const Sidebar = () => {
-  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   return (
     <div>
@@ -37,14 +37,7 @@ const Sidebar = () => {
         </div>
 
         <List className="min-w-full">
-          <ListItem
-            onClick={() => {
-              removeCookie(COOKIE_NAMES.TOKEN);
-              removeCookie(COOKIE_NAMES.USER);
-              navigate('/login');
-            }}
-            className="bg-gray-300 min-w-full"
-          >
+          <ListItem onClick={logout} className="bg-gray-300 min-w-full">
             <ListItemPrefix>
               <FaSignInAlt className="h-5 w-5 rotate-180" />
             </ListItemPrefix>

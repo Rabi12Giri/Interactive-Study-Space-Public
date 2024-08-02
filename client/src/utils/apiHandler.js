@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { SERVER_URL } from '../config';
+import { getTokenFromCookie } from './handleCookies';
 
 const getAxiosInstance = () => {
-  // const authToken = getAuthTokenFromCookie();
+  const token = getTokenFromCookie();
 
   return axios.create({
-    baseURL: SERVER_URL,
+    baseURL: 'http://localhost:8000',
     headers: {
-      Authorization: `Bearer`,
+      Authorization: `Bearer ${token}`,
     },
   });
 };
@@ -41,6 +41,17 @@ export const postRequest = async ({ endpoint, data }) => {
 export const patchRequest = async ({ endpoint, data }) => {
   try {
     const res = await getAxiosInstance().patch(endpoint, data);
+    return { ...res.data, ok: true };
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    }
+  }
+};
+
+export const putRequest = async ({ endpoint, data }) => {
+  try {
+    const res = await getAxiosInstance().put(endpoint, data);
     return { ...res.data, ok: true };
   } catch (error) {
     if (error.response) {

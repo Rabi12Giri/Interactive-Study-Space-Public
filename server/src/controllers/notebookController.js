@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 import { HttpStatus } from '../constant/constants.js';
-import { asyncErrorHandler, sendSuccessResponse, throwError } from '../helpers/index.js';
+import {
+  asyncErrorHandler,
+  sendSuccessResponse,
+  throwError,
+} from '../helpers/index.js';
 import { Note, Notebook, User } from '../schemaModels/model.js';
 
 // Create a new notebook
@@ -137,6 +141,8 @@ export const shareNotebook = asyncErrorHandler(async (req, res) => {
 
   const sharedUsers = await User.find({ _id: { $in: sharedUserIds } });
 
+  console.log(sharedUserIds);
+
   if (sharedUsers.length !== sharedUserIds.length) {
     throwError({
       message: 'One or more users not found',
@@ -144,9 +150,7 @@ export const shareNotebook = asyncErrorHandler(async (req, res) => {
     });
   }
 
-  notebook.shared = [
-    ...new Set([...notebook.shared, ...sharedUsers.map((user) => user._id)]),
-  ];
+  notebook.shared = sharedUserIds;
 
   await notebook.save();
 
@@ -171,7 +175,7 @@ export const getNotebooksByAuthor = asyncErrorHandler(async (req, res) => {
   }
 
   const notebooks = await Notebook.find({ author: authorId }).populate(
-    'author shared'
+    'author'
   );
 
   if (!notebooks || notebooks.length === 0) {
