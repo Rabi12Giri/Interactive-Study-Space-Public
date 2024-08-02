@@ -14,15 +14,15 @@ const Navbar = () => {
   const menuItems = [
     {
       name: 'Home',
-      href: '#',
+      link: '#',
     },
     {
-      name: 'About',
-      href: '#',
+      name: 'Resources',
+      link: 'resources',
     },
     {
       name: 'Contact',
-      href: '#',
+      link: '#',
     },
   ];
 
@@ -52,12 +52,12 @@ const Navbar = () => {
           <ul className="inline-flex space-x-8">
             {menuItems.map((item) => (
               <li key={item.name}>
-                <a
-                  href={item.href}
+                <Link
+                  to={item.link}
                   className="text-sm font-semibold text-gray-800 hover:text-gray-900"
                 >
                   {item.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

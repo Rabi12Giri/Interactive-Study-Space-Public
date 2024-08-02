@@ -112,6 +112,7 @@ async function updateResourceRating(resourceId) {
 // Add feedback to a resource with a limit of 3 per user
 export const addFeedback = asyncErrorHandler(async (req, res) => {
   const { resourceId, comment, rating } = req.body;
+
   const userId = req._id; // Assuming user ID is set by authentication middleware
 
   if (!resourceId || !comment || rating == null) {
@@ -129,7 +130,7 @@ export const addFeedback = asyncErrorHandler(async (req, res) => {
   }
 
   const resource = await Resource.findById(resourceId);
-  
+
   if (!resource) {
     throwError({
       message: 'Resource not found',

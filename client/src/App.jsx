@@ -16,6 +16,9 @@ import SharedNotebooksList from './pages/dashboard/notebook/SharedNotebookList';
 import Notes from './pages/dashboard/notes/Notes';
 import SessionHistoryTable from './pages/dashboard/study-session/SessionHistoryTable';
 import StudySpace from './pages/dashboard/study-session/StudySpace';
+import Resource from './pages/dashboard/resource-sharing/Resource';
+import ViewResources from './pages/dashboard/resource-sharing/ViewResources';
+import PublicResource from './pages/PublicResource';
 
 const App = () => {
   return (
@@ -29,11 +32,14 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/resources" element={<PublicResource />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Notebooks />} />
 
           <Route path="my-profile" element={<MyProfile />} />
           <Route path="shared-notebooks" element={<SharedNotebooksList />} />
+          <Route path="resource-sharing" element={<Resource />} />
+          <Route path="view-resources" element={<ViewResources />} />
           <Route
             path="shared-notebooks/notes/:notebookId"
             element={<Notes />}

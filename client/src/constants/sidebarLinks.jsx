@@ -27,4 +27,14 @@ export const SIDEBAR_LINKS = [
     path: 'study-session',
     icon: <FaPersonChalkboard className="h-5 w-5" />,
   },
+  {
+    name: 'Resource Sharing',
+    path: 'resource-sharing',
+    icon: <FaPersonChalkboard className="h-5 w-5" />,
+  },
+  {
+    name: 'View Resources',
+    path: 'view-resources',
+    icon: <FaPersonChalkboard className="h-5 w-5" />,
+  },
 ];
