@@ -13,7 +13,7 @@ const userRouter = express.Router();
 
 userRouter.route('/').post(addUser).get(getAllUsers).patch().delete();
 
-userRouter.use(authenticateToken);
+// userRouter.use(authenticateToken);
 
 userRouter
   .route('/:userID')
